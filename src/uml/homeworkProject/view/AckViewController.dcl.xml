@@ -1,0 +1,120 @@
+<?xml version="1.0" ?>
+<diagramClass xmlns="http://www.beigesoft.org/xsd/bs-uml-project.xsd">
+
+<measurementUnit>INCH</measurementUnit>
+<isAbleToChangeByDoclet>true</isAbleToChangeByDoclet>
+
+<ClassUml itsId="7499c2b5-bf8f-4e0a-809e-b2e505755932" itsName="AckViewController" namePackage="homeworkProject.view" >
+<pointStart x="0.2" y="3.7100000000000004" >
+</pointStart>
+<width>2.9270833333333335</width>
+<height>1.2000000000000002</height>
+<indexZ>500</indexZ>
+<isAdjustMinimumSize>true</isAdjustMinimumSize>
+<classKind>CLASS</classKind>
+<isMain>true</isMain>
+<MethodClass itsName="setDialogStage" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="dialogStage" >
+<itsType>Stage</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="setPerson" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="person" >
+<itsType>Person</itsType>
+</ParameterMethod>
+</MethodClass>
+</ClassUml>
+
+<ClassUml itsId="c91aa686-f6e3-4bc9-a60a-d82c190598d5" itsName="Object" namePackage="java.lang" >
+<pointStart x="0.54375" y="0.20000000000000018" >
+</pointStart>
+<width>2.2395833333333335</width>
+<height>2.91</height>
+<indexZ>500</indexZ>
+<isAdjustMinimumSize>true</isAdjustMinimumSize>
+<classKind>CLASS</classKind>
+<isMain>false</isMain>
+<MethodClass itsName="getClass" >
+<itsType>Class&lt;?&gt;</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="hashCode" >
+<itsType>int</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="equals" >
+<itsType>boolean</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>Object</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="clone" >
+<itsType>Object</itsType>
+<visibilityKind>PROTECTED</visibilityKind>
+</MethodClass>
+<MethodClass itsName="toString" >
+<itsType>String</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="notify" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="notifyAll" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="wait" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>long</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="wait" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>long</itsType>
+</ParameterMethod>
+<ParameterMethod itsName="arg1" >
+<itsType>int</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="wait" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="finalize" >
+<itsType>void</itsType>
+<visibilityKind>PROTECTED</visibilityKind>
+</MethodClass>
+</ClassUml>
+
+<RelationshipBinary itsId="dc1a78c7-7bc5-4350-aa56-8e510e70c7f3" >
+<indexZ>700</indexZ>
+<kindRelationship>GENERALIZATION</kindRelationship>
+<shapeRelationshipStart shapeId="7499c2b5-bf8f-4e0a-809e-b2e505755932" >
+<pointJoint x="1.6635416666666667" y="3.7100000000000004" >
+</pointJoint>
+<typeEndRelationship><Null/></typeEndRelationship>
+<isOwned>false</isOwned>
+<sideJoint>TOP</sideJoint>
+<sideLength>1.4635416666666667</sideLength>
+</shapeRelationshipStart>
+<shapeRelationshipEnd shapeId="c91aa686-f6e3-4bc9-a60a-d82c190598d5" >
+<pointJoint x="1.6635416666666667" y="3.1100000000000003" >
+</pointJoint>
+<typeEndRelationship>END</typeEndRelationship>
+<isOwned>false</isOwned>
+<sideJoint>BOTTOM</sideJoint>
+<sideLength>1.1197916666666665</sideLength>
+</shapeRelationshipEnd>
+</RelationshipBinary>
+
+</diagramClass>
