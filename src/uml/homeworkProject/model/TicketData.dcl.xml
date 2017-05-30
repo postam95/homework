@@ -1,0 +1,128 @@
+<?xml version="1.0" ?>
+<diagramClass xmlns="http://www.beigesoft.org/xsd/bs-uml-project.xsd">
+
+<measurementUnit>INCH</measurementUnit>
+<isAbleToChangeByDoclet>true</isAbleToChangeByDoclet>
+
+<ClassUml itsId="b143505c-a6ac-436d-b221-0dfb17f00338" itsName="TicketData" namePackage="homeworkProject.model" >
+<pointStart x="0.2" y="3.7100000000000004" >
+</pointStart>
+<width>2.4375</width>
+<height>1.58</height>
+<indexZ>500</indexZ>
+<isAdjustMinimumSize>true</isAdjustMinimumSize>
+<classKind>CLASS</classKind>
+<isMain>true</isMain>
+<MethodClass itsName="getType" >
+<itsType>String</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="setName" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="type" >
+<itsType>String</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="getAmount" >
+<itsType>Integer</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="setAmount" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="amount" >
+<itsType>Integer</itsType>
+</ParameterMethod>
+</MethodClass>
+</ClassUml>
+
+<ClassUml itsId="9bdb0fff-f854-4d4f-97ec-fb7cf4f8afcb" itsName="Object" namePackage="java.lang" >
+<pointStart x="0.29895833333333327" y="0.20000000000000018" >
+</pointStart>
+<width>2.2395833333333335</width>
+<height>2.91</height>
+<indexZ>500</indexZ>
+<isAdjustMinimumSize>true</isAdjustMinimumSize>
+<classKind>CLASS</classKind>
+<isMain>false</isMain>
+<MethodClass itsName="getClass" >
+<itsType>Class&lt;?&gt;</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="hashCode" >
+<itsType>int</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="equals" >
+<itsType>boolean</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>Object</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="clone" >
+<itsType>Object</itsType>
+<visibilityKind>PROTECTED</visibilityKind>
+</MethodClass>
+<MethodClass itsName="toString" >
+<itsType>String</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="notify" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="notifyAll" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="wait" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>long</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="wait" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>long</itsType>
+</ParameterMethod>
+<ParameterMethod itsName="arg1" >
+<itsType>int</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="wait" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="finalize" >
+<itsType>void</itsType>
+<visibilityKind>PROTECTED</visibilityKind>
+</MethodClass>
+</ClassUml>
+
+<RelationshipBinary itsId="7feaed16-0e67-4c4c-997c-aa24b4866243" >
+<indexZ>700</indexZ>
+<kindRelationship>GENERALIZATION</kindRelationship>
+<shapeRelationshipStart shapeId="b143505c-a6ac-436d-b221-0dfb17f00338" >
+<pointJoint x="1.41875" y="3.7100000000000004" >
+</pointJoint>
+<typeEndRelationship><Null/></typeEndRelationship>
+<isOwned>false</isOwned>
+<sideJoint>TOP</sideJoint>
+<sideLength>1.21875</sideLength>
+</shapeRelationshipStart>
+<shapeRelationshipEnd shapeId="9bdb0fff-f854-4d4f-97ec-fb7cf4f8afcb" >
+<pointJoint x="1.41875" y="3.1100000000000003" >
+</pointJoint>
+<typeEndRelationship>END</typeEndRelationship>
+<isOwned>false</isOwned>
+<sideJoint>BOTTOM</sideJoint>
+<sideLength>1.1197916666666667</sideLength>
+</shapeRelationshipEnd>
+</RelationshipBinary>
+
+</diagramClass>

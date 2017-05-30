@@ -1,0 +1,158 @@
+<?xml version="1.0" ?>
+<diagramClass xmlns="http://www.beigesoft.org/xsd/bs-uml-project.xsd">
+
+<measurementUnit>INCH</measurementUnit>
+<isAbleToChangeByDoclet>true</isAbleToChangeByDoclet>
+
+<ClassUml itsId="da509cdf-f8e5-4ca3-988b-9b13b6049a98" itsName="OrderViewController" namePackage="homeworkProject.view" >
+<pointStart x="0.2" y="3.7100000000000004" >
+</pointStart>
+<width>4.458333333333333</width>
+<height>2.15</height>
+<indexZ>500</indexZ>
+<isAdjustMinimumSize>true</isAdjustMinimumSize>
+<classKind>CLASS</classKind>
+<isMain>true</isMain>
+<MethodClass itsName="setTicketHandling" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="ticketHandling" >
+<itsType>TicketHandling</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="setPerson" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="person" >
+<itsType>Person</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="setMainFX" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="mainFX" >
+<itsType>MainFX</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="setTicketService" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="ticketService" >
+<itsType>TicketService</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="setDialogStage" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="dialogStage" >
+<itsType>Stage</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="isOrderClicked" >
+<itsType>boolean</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="handleWarning" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="title" >
+<itsType>String</itsType>
+</ParameterMethod>
+<ParameterMethod itsName="header" >
+<itsType>String</itsType>
+</ParameterMethod>
+<ParameterMethod itsName="content" >
+<itsType>String</itsType>
+</ParameterMethod>
+</MethodClass>
+</ClassUml>
+
+<ClassUml itsId="fa2115d6-9d92-4331-956c-a03e8e246d26" itsName="Object" namePackage="java.lang" >
+<pointStart x="1.3093749999999997" y="0.20000000000000018" >
+</pointStart>
+<width>2.2395833333333335</width>
+<height>2.91</height>
+<indexZ>500</indexZ>
+<isAdjustMinimumSize>true</isAdjustMinimumSize>
+<classKind>CLASS</classKind>
+<isMain>false</isMain>
+<MethodClass itsName="getClass" >
+<itsType>Class&lt;?&gt;</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="hashCode" >
+<itsType>int</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="equals" >
+<itsType>boolean</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>Object</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="clone" >
+<itsType>Object</itsType>
+<visibilityKind>PROTECTED</visibilityKind>
+</MethodClass>
+<MethodClass itsName="toString" >
+<itsType>String</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="notify" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="notifyAll" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="wait" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>long</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="wait" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>long</itsType>
+</ParameterMethod>
+<ParameterMethod itsName="arg1" >
+<itsType>int</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="wait" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="finalize" >
+<itsType>void</itsType>
+<visibilityKind>PROTECTED</visibilityKind>
+</MethodClass>
+</ClassUml>
+
+<RelationshipBinary itsId="07b9271e-95f7-430b-ae5f-d448dda8aaeb" >
+<indexZ>700</indexZ>
+<kindRelationship>GENERALIZATION</kindRelationship>
+<shapeRelationshipStart shapeId="da509cdf-f8e5-4ca3-988b-9b13b6049a98" >
+<pointJoint x="2.4291666666666667" y="3.7100000000000004" >
+</pointJoint>
+<typeEndRelationship><Null/></typeEndRelationship>
+<isOwned>false</isOwned>
+<sideJoint>TOP</sideJoint>
+<sideLength>2.2291666666666665</sideLength>
+</shapeRelationshipStart>
+<shapeRelationshipEnd shapeId="fa2115d6-9d92-4331-956c-a03e8e246d26" >
+<pointJoint x="2.429166666666667" y="3.1100000000000003" >
+</pointJoint>
+<typeEndRelationship>END</typeEndRelationship>
+<isOwned>false</isOwned>
+<sideJoint>BOTTOM</sideJoint>
+<sideLength>1.1197916666666663</sideLength>
+</shapeRelationshipEnd>
+</RelationshipBinary>
+
+</diagramClass>

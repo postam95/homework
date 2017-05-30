@@ -1,0 +1,157 @@
+<?xml version="1.0" ?>
+<diagramClass xmlns="http://www.beigesoft.org/xsd/bs-uml-project.xsd">
+
+<measurementUnit>INCH</measurementUnit>
+<isAbleToChangeByDoclet>true</isAbleToChangeByDoclet>
+
+<ClassUml itsId="f8594814-6fe0-40a7-b433-7dfbe35d86c1" itsName="TicketHandling" namePackage="homeworkProject.businessLogic" >
+<pointStart x="0.2" y="3.7100000000000004" >
+</pointStart>
+<width>7.96875</width>
+<height>1.96</height>
+<indexZ>500</indexZ>
+<isAdjustMinimumSize>true</isAdjustMinimumSize>
+<classKind>CLASS</classKind>
+<isMain>true</isMain>
+<MethodClass itsName="getShoppingCart" >
+<itsType>Ticket&gt;</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="isInputValidTickets" >
+<itsType>boolean</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="textfield" >
+<itsType>String</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="isInputValidPerson" >
+<itsType>String</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="name" >
+<itsType>String</itsType>
+</ParameterMethod>
+<ParameterMethod itsName="email" >
+<itsType>String</itsType>
+</ParameterMethod>
+<ParameterMethod itsName="telephone" >
+<itsType>String</itsType>
+</ParameterMethod>
+<ParameterMethod itsName="postalCode" >
+<itsType>String</itsType>
+</ParameterMethod>
+<ParameterMethod itsName="city" >
+<itsType>String</itsType>
+</ParameterMethod>
+<ParameterMethod itsName="street" >
+<itsType>String</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="addToCart" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="ticket" >
+<itsType>Ticket</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="removeFromCart" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="ticketToRemove" >
+<itsType>Ticket</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="isShoppingCartEmpty" >
+<itsType>boolean</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+</ClassUml>
+
+<ClassUml itsId="db48effc-e6e3-4ba0-8ff7-6df42d9968e7" itsName="Object" namePackage="java.lang" >
+<pointStart x="3.064583333333333" y="0.20000000000000018" >
+</pointStart>
+<width>2.2395833333333335</width>
+<height>2.91</height>
+<indexZ>500</indexZ>
+<isAdjustMinimumSize>true</isAdjustMinimumSize>
+<classKind>CLASS</classKind>
+<isMain>false</isMain>
+<MethodClass itsName="getClass" >
+<itsType>Class&lt;?&gt;</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="hashCode" >
+<itsType>int</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="equals" >
+<itsType>boolean</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>Object</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="clone" >
+<itsType>Object</itsType>
+<visibilityKind>PROTECTED</visibilityKind>
+</MethodClass>
+<MethodClass itsName="toString" >
+<itsType>String</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="notify" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="notifyAll" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="wait" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>long</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="wait" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>long</itsType>
+</ParameterMethod>
+<ParameterMethod itsName="arg1" >
+<itsType>int</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="wait" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="finalize" >
+<itsType>void</itsType>
+<visibilityKind>PROTECTED</visibilityKind>
+</MethodClass>
+</ClassUml>
+
+<RelationshipBinary itsId="4d0853cf-ebcc-47c7-8c56-0d3206b3b69a" >
+<indexZ>700</indexZ>
+<kindRelationship>GENERALIZATION</kindRelationship>
+<shapeRelationshipStart shapeId="f8594814-6fe0-40a7-b433-7dfbe35d86c1" >
+<pointJoint x="4.184375" y="3.7100000000000004" >
+</pointJoint>
+<typeEndRelationship><Null/></typeEndRelationship>
+<isOwned>false</isOwned>
+<sideJoint>TOP</sideJoint>
+<sideLength>3.984375</sideLength>
+</shapeRelationshipStart>
+<shapeRelationshipEnd shapeId="db48effc-e6e3-4ba0-8ff7-6df42d9968e7" >
+<pointJoint x="4.184375" y="3.1100000000000003" >
+</pointJoint>
+<typeEndRelationship>END</typeEndRelationship>
+<isOwned>false</isOwned>
+<sideJoint>BOTTOM</sideJoint>
+<sideLength>1.1197916666666667</sideLength>
+</shapeRelationshipEnd>
+</RelationshipBinary>
+
+</diagramClass>

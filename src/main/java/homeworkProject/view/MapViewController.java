@@ -1,5 +1,8 @@
 package homeworkProject.view;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import homeworkProject.MainFX;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -12,6 +15,12 @@ import javafx.stage.Stage;
  * @author Mario Posta
  */
 public class MapViewController {
+	
+    /**
+     * Logger for tracking the application.
+     */
+    private Logger logger = LoggerFactory.getLogger(MainFX.class);
+    
 	/**
 	 * ImageView for the map of Hungaroring.
 	 */
@@ -31,7 +40,7 @@ public class MapViewController {
     public void setDialogStage(Stage dialogStage) {
     	this.dialogStage = dialogStage;
     	setImageView();
-        MainFX.logger.debug("DialogeStage has been set in the MapView");
+        logger.debug("DialogeStage has been set in the MapView");
 
     }
     
@@ -41,6 +50,6 @@ public class MapViewController {
      */
     private void setImageView(){
         imageView.setImage(new Image(MapViewController.class.getClassLoader().getResource("Hungaroring.jpg").toString()));
-        MainFX.logger.debug("Circuit map has been loaded.");
+        logger.debug("Circuit map has been loaded.");
     }
 }

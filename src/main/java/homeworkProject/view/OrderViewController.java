@@ -1,6 +1,9 @@
 package homeworkProject.view;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import homeworkProject.MainFX;
 import homeworkProject.businessLogic.TicketHandling;
 import homeworkProject.data.TicketService;
@@ -18,6 +21,11 @@ import javafx.stage.Stage;
  * @author Mario Posta
  */
 public class OrderViewController {
+	
+    /**
+     * Logger for tracking the application.
+     */
+    private Logger logger = LoggerFactory.getLogger(MainFX.class);
 
 	/**
 	 * Textfield for the name of the person who orders.
@@ -75,11 +83,24 @@ public class OrderViewController {
 	 * Instance of the TicketService class to control ticket transactions.
 	 */
 	private TicketService ticketService;
-    
+	
     /**
      * Indicates whether the user clicked on the Order button.
      */
     private boolean orderClicked = false;
+    
+	/**
+	 * TicketHandling for managing the ticket transactions.
+	 */
+	private TicketHandling ticketHandling;
+	
+	/**
+	 * Sets the ticketHandling transaction manager object.
+	 * @param ticketHandling the only ticketHanlding instance
+	 */
+	public void setTicketHandling(TicketHandling ticketHandling) {
+		this.ticketHandling = ticketHandling;
+	}
 
     /**
      * Sets the person to be edited in the dialog.
@@ -95,7 +116,7 @@ public class OrderViewController {
         cityField.setText(person.getCity());
         streetField.setText(person.getStreet());
         
-        MainFX.logger.debug("Person data has been read");
+        logger.debug("Person data has been read");
 
     }
     
@@ -139,10 +160,10 @@ public class OrderViewController {
      */
     @FXML
     private void handleOrder() {
-    	String errorMessage = TicketHandling.isInputValidPerson(nameField.getText(), emailField.getText(), telephoneField.getText(),
+    	String errorMessage = ticketHandling.isInputValidPerson(nameField.getText(), emailField.getText(), telephoneField.getText(),
     			postalCodeField.getText(), cityField.getText(), streetField.getText());
     	if (errorMessage == null)	{
-            MainFX.logger.debug("Person input data is correct");
+            logger.debug("Person input data is correct");
 
             person.setName(nameField.getText());
             person.setEmail(emailField.getText());
@@ -153,15 +174,15 @@ public class OrderViewController {
         	orderClicked = true;
     		dialogStage.close();
     		
-    		for (Ticket ticket : TicketHandling.getShoppingCart()) {
+    		for (Ticket ticket : ticketHandling.getShoppingCart()) {
 				ticketService.modifyTicketData(ticket.getType(), ticket.getAmount());
 			}
     		
-    		MainFX.logger.debug("Person datas has been read from the OrderView");
+    		logger.debug("Person datas has been read from the OrderView");
     	}
     	else	{
     		handleWarning("Warning", "Bad inputs", errorMessage);
-            MainFX.logger.warn("Person input data is not correct");
+            logger.warn("Person input data is not correct");
     	}
     }
     
@@ -179,7 +200,7 @@ public class OrderViewController {
         alert.setContentText(content);
         alert.showAndWait();
         
-        MainFX.logger.debug("Warning window has been opened");
+        logger.debug("Warning window has been opened");
     }
 
     /**
@@ -190,6 +211,6 @@ public class OrderViewController {
     private void handleCancel() {
         dialogStage.close();
         
-        MainFX.logger.debug("Cancel button has been clicked on the OrderView");
+        logger.debug("Cancel button has been clicked on the OrderView");
     }
 }

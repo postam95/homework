@@ -1,5 +1,8 @@
 package homeworkProject.view;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import homeworkProject.MainFX;
 import homeworkProject.model.Person;
 import javafx.fxml.FXML;
@@ -12,6 +15,11 @@ import javafx.stage.Stage;
  * @author Mario Posta
  */
 public class AckViewController {
+	
+    /**
+     * Logger for tracking the application.
+     */
+    private Logger logger = LoggerFactory.getLogger(MainFX.class);
 	
 	/**
 	 * Label for the name of the person who orders.
@@ -68,7 +76,7 @@ public class AckViewController {
      */
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
-        MainFX.logger.debug("DialogeStage has been set in AckView");
+        logger.debug("DialogeStage has been set in AckView");
 	}
 	
 	/**
@@ -86,7 +94,7 @@ public class AckViewController {
         cityLabel.setText(person.getCity());
         streetLabel.setText(person.getStreet());
         
-        MainFX.logger.debug("Person details has been set on the AckView");
+        logger.debug("Person details has been set on the AckView");
     }
 
 }

@@ -2,6 +2,9 @@ package homeworkProject.view;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import homeworkProject.MainFX;
 import homeworkProject.data.TicketService;
 import homeworkProject.model.TicketData;
@@ -14,6 +17,12 @@ import javafx.stage.Stage;
  * @author Mario Posta
  */
 public class TicketViewController {
+	
+    /**
+     * Logger for tracking the application.
+     */
+    private Logger logger = LoggerFactory.getLogger(MainFX.class);
+    
     /**
      * TextLabel for the amount of the Super Gold TicketDatas.
      */
@@ -88,7 +97,7 @@ public class TicketViewController {
 	 * Method for showing available tickets.
 	 */
     private void showAvailableTicketData()	{
-        MainFX.logger.debug("Ticket query has been reveived");
+        logger.debug("Ticket query has been reveived");
 
     	List<TicketData> TicketDatas = ticketService.getAvailableTickets();
     	for (TicketData TicketData : TicketDatas) {

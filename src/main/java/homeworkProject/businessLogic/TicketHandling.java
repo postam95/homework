@@ -1,6 +1,7 @@
 package homeworkProject.businessLogic;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import homeworkProject.MainFX;
 import homeworkProject.model.Ticket;
@@ -15,16 +16,21 @@ import javafx.collections.ObservableList;
  */
 public class TicketHandling {
 	
+    /**
+     * Logger for tracking the application.
+     */
+    private Logger logger = LoggerFactory.getLogger(MainFX.class);
+    
 	/**
 	 * List to representing the shopping cart.
 	 */
-    private static ObservableList<Ticket> shoppingCart = FXCollections.observableArrayList();
+    private ObservableList<Ticket> shoppingCart = FXCollections.observableArrayList();
 
 	/**
      * Returns a List which contains the tickets which were added to the shopping cart.
      * @return a List that represents the shopping cart
      */
-    public static ObservableList<Ticket> getShoppingCart() {
+    public ObservableList<Ticket> getShoppingCart() {
         return shoppingCart;
     }
 	
@@ -36,8 +42,8 @@ public class TicketHandling {
      * @return {@code true} if the amount of the ticket is valid and
      * {@code false} otherwise
      */
-    public static boolean isInputValidTickets(String textfield) {
-        MainFX.logger.debug("TicketInputValidation is in progress");
+    public boolean isInputValidTickets(String textfield) {
+        logger.debug("TicketInputValidation is in progress");
         
         if (textfield == null || textfield.length() == 0) {
             return false;
@@ -56,7 +62,7 @@ public class TicketHandling {
     }
     
     /**
-     *      * Validates the user input in the text fields.
+     * Validates the user input in the text fields.
      * Returns {@code true} if all inputs are valid,
      * {@code false} otherwise
      * @param name the name of the person
@@ -68,9 +74,9 @@ public class TicketHandling {
      * @return {@code true} if all inputs are valid and
      * {@code false} otherwise
      */
-    public static String isInputValidPerson(String name, String email, String telephone,
+    public String isInputValidPerson(String name, String email, String telephone,
     		String postalCode, String city, String street) {
-        MainFX.logger.debug("PersonInputValidation is in progress");
+        logger.debug("PersonInputValidation is in progress");
 
         String errorMessage = "";
         if (name == null || name.length() == 0) {
@@ -96,11 +102,11 @@ public class TicketHandling {
         }
 
         if (errorMessage.length() == 0) {
-        	MainFX.logger.debug("Personal infos has been given correctly");
+        	logger.debug("Personal infos has been given correctly");
         	
             return null;
         } else {
-        	MainFX.logger.warn("Personal infos has not been added properly");
+        	logger.warn("Personal infos has not been added properly");
             return errorMessage;
         }
     }
@@ -110,8 +116,8 @@ public class TicketHandling {
      * Called when the user clicks on the Add to Cart button of the Start View;
      * @param ticket the ticket is going to be added to the shopping cart
      */
-    public static void addToCart(Ticket ticket){
-        MainFX.logger.debug("Adding to cart is in progress");
+    public void addToCart(Ticket ticket){
+        logger.debug("Adding to cart is in progress");
 
     	boolean ticketExisted = false;
     	for (Ticket ticketIterator : shoppingCart) {
@@ -120,14 +126,28 @@ public class TicketHandling {
 				ticketIterator.setAmount(ticketIterator.getAmount() + ticket.getAmount());
 				ticketExisted = true;
 				
-				MainFX.logger.debug("Ticket has been overwritten in the shopping cart");
+				logger.debug("Ticket has been overwritten in the shopping cart");
 			}
 		}
 		if (!ticketExisted)	{
 			shoppingCart.add(ticket);
 			
-			MainFX.logger.debug("A new ticket has been added to the shopping cart");
+			logger.debug("A new ticket has been added to the shopping cart");
 		}		
+    }
+    
+    
+    /**
+     * Method for removing ticket from the shopping cart.
+     * @param ticketToRemove the ticket to remove from the shopping cart
+     */
+    public void removeFromCart(Ticket ticketToRemove){
+    	for (Ticket ticket : shoppingCart) {
+			if (ticketToRemove.getType() == ticket.getType())	{
+				shoppingCart.remove(ticket);
+				break;
+			}
+		}
     }
     
     /**
@@ -135,10 +155,9 @@ public class TicketHandling {
      * @return {@code true} if the shopping cart empty,
      * {@code false} otherwise
      */
-    public static boolean isShoppingCartEmpty() {
-        MainFX.logger.debug("Shopping cart checking is in progress");
+    public boolean isShoppingCartEmpty() {
+        logger.debug("Shopping cart checking is in progress");
 
     	return shoppingCart.isEmpty();
     }
-
 }

@@ -1,12 +1,17 @@
 
-
 import homeworkProject.businessLogic.TicketHandling;
+
 import homeworkProject.model.Ticket;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * Class for the unit tests of the business logic.
+ * 
+ * @author Mario Posta
+ */
 public class testTicketHandling {
 	
 	/**
@@ -16,10 +21,15 @@ public class testTicketHandling {
 	public void testIsShoppingCartEmpty()	{
 		TicketHandling ticketHandling = new TicketHandling();
 		Ticket ticket = new Ticket("SG", 45, 45);
+		
 		assertEquals(true, ticketHandling.isShoppingCartEmpty());
+		
 		ticketHandling.addToCart(ticket);
+		
 		assertEquals(false, ticketHandling.isShoppingCartEmpty());
+		
 		ticketHandling.getShoppingCart().clear();
+		
 		assertEquals(true, ticketHandling.isShoppingCartEmpty());
 	}
 	
@@ -38,7 +48,6 @@ public class testTicketHandling {
 		assertEquals(false, ticketHandling.isInputValidTickets("ewf"));
 
 	}
-	
 	
 	/**
 	 * Test whether the personal informations are valid or not.
@@ -62,16 +71,16 @@ public class testTicketHandling {
 	}
 	
 	/**
-	 * Tests whether the shopping cart addition is successfull or not.
+	 * Tests whether the shopping cart addition is successful or not.
 	 */
 	@Test
 	public void testAddToCart()	{
 		TicketHandling ticketHandling = new TicketHandling();
 		Ticket ticketFirst = new Ticket("Super Gold", 45, 45);
-		
 		int sizeBeforeAdding = ticketHandling.getShoppingCart().size();
 		ticketHandling.addToCart(ticketFirst);
 		int sizeAfterAdding = ticketHandling.getShoppingCart().size();
+		
 		assertEquals(sizeBeforeAdding+1, sizeAfterAdding);
 		
 		Ticket ticketSecond = new Ticket("Super Gold", 45, 45);
@@ -79,7 +88,26 @@ public class testTicketHandling {
 		int sizeBeforAddingTheSameType = ticketHandling.getShoppingCart().size();
 		ticketHandling.addToCart(ticketSecond);
 		int sizeAfterAddingTheSameType = ticketHandling.getShoppingCart().size();
+		
 		assertEquals(sizeBeforAddingTheSameType, sizeAfterAddingTheSameType);
 		assertEquals(ticketFirst.getAmount(), sumOfAmounts);
+	}
+	
+	/**
+	 * Tests whether the method removes the elements properly or not.
+	 */
+	@Test
+	public void testRemoveFromCart()	{
+		TicketHandling ticketHandling = new TicketHandling();
+		Ticket ticketFirst = new Ticket("Super Gold", 45, 45);
+		Ticket ticketSecond = new Ticket("Super Gold", 45, 45);
+		Ticket ticketToRemove = new Ticket("Super Gold", 60, 60);
+		ticketHandling.addToCart(ticketFirst);
+		ticketHandling.addToCart(ticketSecond);
+		int sizeBeforeRemoving = ticketHandling.getShoppingCart().size();
+		ticketHandling.removeFromCart(ticketToRemove);
+		int sizeAfterRemoving = ticketHandling.getShoppingCart().size();
+		
+		assertEquals(sizeBeforeRemoving, sizeAfterRemoving+1);
 	}
 }

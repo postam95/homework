@@ -4,9 +4,9 @@
         <class>homeworkProject.model.TicketData</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
-            <property name="javax.persistence.jdbc.url" value=""/>
-            <property name="javax.persistence.jdbc.user" value=""/>
-            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@db.inf.unideb.hu:1521:ora11g"/>
+            <property name="javax.persistence.jdbc.user" value="H_I4DW8T"/>
+            <property name="javax.persistence.jdbc.password" value="kassai"/>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.OracleDialect"/>
             <property name="hibernate.format_sql" value="true"/>

@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import homeworkProject.businessLogic.TicketHandling;
 import homeworkProject.data.TicketService;
 import homeworkProject.model.Person;
 import homeworkProject.view.AckViewController;
@@ -37,7 +38,7 @@ public class MainFX extends Application {
     /**
      * Logger for tracking the application.
      */
-    public static Logger logger = LoggerFactory.getLogger(MainFX.class);
+    private Logger logger = LoggerFactory.getLogger(MainFX.class);
 
 	/**
 	 * Stage for starting the application and loading the initial content.
@@ -65,6 +66,11 @@ public class MainFX extends Application {
 	private TicketService ticketService;
 	
 	/**
+	 * TicketHandling for managing the ticket transactions.
+	 */
+	private TicketHandling ticketHandling;
+	
+	/**
 	 * Method for closing database connections.
 	 */
 	@Override
@@ -90,7 +96,9 @@ public class MainFX extends Application {
     		this.entityManagerFactory = Persistence.createEntityManagerFactory("TicketDataPersistenceUnit");
     		this.entityManager = entityManagerFactory.createEntityManager();
     		this.ticketService = new TicketService(entityManager);
+    		this.ticketHandling = new TicketHandling();
         	ticketService.initializeDatabase();
+        	logger.debug("Instances are ready");
 		} catch (Exception e) {
 	        logger.error("No connection with the database");;
 	        Alert alert = new Alert(AlertType.ERROR);
@@ -156,7 +164,6 @@ public class MainFX extends Application {
         }
     }
     
-    
     /**
      * Opens a new stage with the ticket database informations.
      * Users can check the amounts of the tickets.
@@ -214,6 +221,7 @@ public class MainFX extends Application {
             controller.setMainFX(this);
             controller.setPerson(person);
             controller.setTicketService(ticketService);
+            controller.setTicketHandling(ticketHandling);
 
             dialogStage.showAndWait();
             return controller.isOrderClicked();
@@ -222,6 +230,7 @@ public class MainFX extends Application {
             return false;
         }
     }
+    
     /**
      * Opens a new stage when the user clicks on the Order button of the OrderView
      * to finalize the order. Shows the AckView fxml file.
@@ -253,7 +262,6 @@ public class MainFX extends Application {
         }
     }
 
-
     /**
      * Shows the initial view of this application. Materalizes the start point of
      * this application with the StartView fxml.
@@ -269,6 +277,8 @@ public class MainFX extends Application {
             StartViewController controller = loader.getController();
             controller.setMainFX(this);
             controller.setTicketService(ticketService);
+            controller.setTicketHandling(ticketHandling);
+            controller.initStartView();
 
             rootLayout.setCenter(startView);
         } catch (IOException e) {

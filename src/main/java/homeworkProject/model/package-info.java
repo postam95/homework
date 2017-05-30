@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author mario
+ * @author Mario Posta
  *
  */
 package homeworkProject.model;

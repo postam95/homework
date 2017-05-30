@@ -5,6 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import homeworkProject.MainFX;
 import homeworkProject.model.TicketData;
 
@@ -14,6 +17,12 @@ import homeworkProject.model.TicketData;
  * @author Mario Posta
  */
 public class TicketService {
+	
+    /**
+     * Logger for tracking the application.
+     */
+    private Logger logger = LoggerFactory.getLogger(MainFX.class);
+    
 	/**
 	 * EntityManager for controll the database.
 	 */
@@ -32,7 +41,7 @@ public class TicketService {
 	 * Initializes the database with initial ticket amounts.
 	 */
 	public void initializeDatabase()	{
-        MainFX.logger.debug("Database initialization is in progress");
+        logger.debug("Database initialization is in progress");
 
 		entityManager.getTransaction().begin();
 		@SuppressWarnings("unused")
@@ -51,7 +60,7 @@ public class TicketService {
 	 * @return the content of the database
 	 */
 	public List<TicketData> getAvailableTickets() {
-        MainFX.logger.debug("Database qeury is in progress");
+        logger.debug("Database qeury is in progress");
 
 		TypedQuery<TicketData> query = entityManager.createQuery(
 				"select t from homeworkProject.model.TicketData t", TicketData.class
@@ -66,7 +75,7 @@ public class TicketService {
 	 * @return a new TicketData object which has been added to the database
 	 */
 	public TicketData createTicket(String type, Integer amount) {
-        MainFX.logger.debug("Ticket creating is in progress");
+        logger.debug("Ticket creating is in progress");
 
 		TicketData TicketData = new TicketData(type, amount);
 		entityManager.persist(TicketData);
@@ -79,7 +88,7 @@ public class TicketService {
 	 * @param amount the amount of the ticket to subtract from the proper ticket amount
 	 */
 	public void modifyTicketData(String type, Integer amount)	{
-		MainFX.logger.debug("Ticket modifying is in progress");
+		logger.debug("Ticket modifying is in progress");
 
 		TicketData TicketData = entityManager.find(TicketData.class, type);
 		  
@@ -96,7 +105,7 @@ public class TicketService {
 	 * {@code false} otherwise
 	 */
 	public boolean checkAvailableTickets(String type, Integer amount){
-        MainFX.logger.debug("Ticket availability check is in progress");
+        logger.debug("Ticket availability check is in progress");
 
 		TicketData TicketData = entityManager.find(TicketData.class, type);
 		if (TicketData != null && TicketData.getAmount()-amount >= 0)

@@ -1,0 +1,165 @@
+<?xml version="1.0" ?>
+<diagramClass xmlns="http://www.beigesoft.org/xsd/bs-uml-project.xsd">
+
+<measurementUnit>INCH</measurementUnit>
+<isAbleToChangeByDoclet>true</isAbleToChangeByDoclet>
+
+<ClassUml itsId="a676e04a-df95-4261-a1ce-ad23d5650431" itsName="MainFX" namePackage="homeworkProject" >
+<pointStart x="0.44479166666666675" y="3.72" >
+</pointStart>
+<width>2.9375</width>
+<height>2.53</height>
+<indexZ>500</indexZ>
+<isAdjustMinimumSize>true</isAdjustMinimumSize>
+<classKind>CLASS</classKind>
+<isMain>true</isMain>
+<MethodClass itsName="stop" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="start" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="primaryStage" >
+<itsType>Stage</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="initRootLayout" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="showMapView" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="showTicketView" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="showOrderView" >
+<itsType>boolean</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="person" >
+<itsType>Person</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="showAckView" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="person" >
+<itsType>Person</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="showStartView" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="getPrimaryStage" >
+<itsType>Stage</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+</ClassUml>
+
+<ClassUml itsId="af2a9968-edb0-494f-b832-805c64222ecf" itsName="Application" namePackage="javafx.application" >
+<pointStart x="0.2" y="0.20000000000000018" >
+</pointStart>
+<width>3.4270833333333335</width>
+<height>2.92</height>
+<indexZ>500</indexZ>
+<isAdjustMinimumSize>true</isAdjustMinimumSize>
+<classKind>CLASS</classKind>
+<isMain>false</isMain>
+<AttributeClass itsName="STYLESHEET_CASPIAN" >
+<itsType>String</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<defaultValue><Null/></defaultValue>
+<constraintsValue><Null/></constraintsValue>
+</AttributeClass>
+<AttributeClass itsName="STYLESHEET_MODENA" >
+<itsType>String</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<defaultValue><Null/></defaultValue>
+<constraintsValue><Null/></constraintsValue>
+</AttributeClass>
+<MethodClass itsName="launch" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>Application&gt;</itsType>
+</ParameterMethod>
+<ParameterMethod itsName="arg1" >
+<itsType>String[]</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="launch" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>String[]</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="init" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="start" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>Stage</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="stop" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="getHostServices" >
+<itsType>HostServices</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="getParameters" >
+<itsType>Parameters</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="notifyPreloader" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>PreloaderNotification</itsType>
+</ParameterMethod>
+</MethodClass>
+<MethodClass itsName="getUserAgentStylesheet" >
+<itsType>String</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+</MethodClass>
+<MethodClass itsName="setUserAgentStylesheet" >
+<itsType>void</itsType>
+<visibilityKind>PUBLIC</visibilityKind>
+<ParameterMethod itsName="arg0" >
+<itsType>String</itsType>
+</ParameterMethod>
+</MethodClass>
+</ClassUml>
+
+<RelationshipBinary itsId="c0fe4d75-b06a-4b95-9510-f58f8939a9c6" >
+<indexZ>700</indexZ>
+<kindRelationship>GENERALIZATION</kindRelationship>
+<shapeRelationshipStart shapeId="a676e04a-df95-4261-a1ce-ad23d5650431" >
+<pointJoint x="1.9135416666666667" y="3.72" >
+</pointJoint>
+<typeEndRelationship><Null/></typeEndRelationship>
+<isOwned>false</isOwned>
+<sideJoint>TOP</sideJoint>
+<sideLength>1.46875</sideLength>
+</shapeRelationshipStart>
+<shapeRelationshipEnd shapeId="af2a9968-edb0-494f-b832-805c64222ecf" >
+<pointJoint x="1.9135416666666667" y="3.12" >
+</pointJoint>
+<typeEndRelationship>END</typeEndRelationship>
+<isOwned>false</isOwned>
+<sideJoint>BOTTOM</sideJoint>
+<sideLength>1.713541666666667</sideLength>
+</shapeRelationshipEnd>
+</RelationshipBinary>
+
+</diagramClass>
