@@ -17,8 +17,11 @@ import homeworkProject.view.OrderViewController;
 import homeworkProject.view.StartViewController;
 import homeworkProject.view.TicketViewController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -49,25 +52,29 @@ public class MainFX extends Application {
     /**
      * EntityManagerFactory for creating connection.
      */
-	private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("TicketDataPersistenceUnit");
+	private EntityManagerFactory entityManagerFactory;
 	
 	/**
 	 * EntityManager for database.
 	 */
-	private EntityManager entityManager = entityManagerFactory.createEntityManager();
+	private EntityManager entityManager;
 	
 	/**
 	 * TicketService for managing database transactions.
 	 */
-	private TicketService ticketService = new TicketService(entityManager);
+	private TicketService ticketService;
 	
 	/**
 	 * Method for closing database connections.
 	 */
 	@Override
 	public void stop ()	{
-		entityManager.close();
-		entityManagerFactory.close();
+		if (entityManagerFactory != null)	{
+			entityManager.close();
+			entityManagerFactory.close();
+			logger.debug("EntityManager has been closed");
+		}
+		logger.debug("Application has been closed");
 	}
 	
     /**
@@ -78,7 +85,21 @@ public class MainFX extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Welcome to the Ticket System!");
-    	ticketService.initializeDatabase();
+        
+    	try {
+    		this.entityManagerFactory = Persistence.createEntityManagerFactory("TicketDataPersistenceUnit");
+    		this.entityManager = entityManagerFactory.createEntityManager();
+    		this.ticketService = new TicketService(entityManager);
+        	ticketService.initializeDatabase();
+		} catch (Exception e) {
+	        logger.error("No connection with the database");;
+	        Alert alert = new Alert(AlertType.ERROR);
+	        alert.setTitle("Error");
+	        alert.setHeaderText("No connection");
+	        alert.setContentText("Sorry, there is no connection with the database");
+	        alert.showAndWait();
+	        Platform.exit();
+		}
     	
         logger.debug("Initial stage has been opened");
         
