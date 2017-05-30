@@ -31,6 +31,8 @@ public class MapViewController {
     public void setDialogStage(Stage dialogStage) {
     	this.dialogStage = dialogStage;
     	setImageView();
+        MainFX.logger.debug("DialogeStage has been set in the MapView");
+
     }
     
     /**

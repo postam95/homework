@@ -1,11 +1,11 @@
 package homeworkProject.businessLogic;
 
+
+
 import homeworkProject.MainFX;
 import homeworkProject.model.Ticket;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 /**
  * Class for representing the business logic of this application
@@ -19,13 +19,8 @@ public class TicketHandling {
 	 * List to representing the shopping cart.
 	 */
     private static ObservableList<Ticket> shoppingCart = FXCollections.observableArrayList();
-    
-    /**
-     * Instance of the MainFX class to handle the calls to open another stage.
-     */
-    private static MainFX mainFX;
-    
-    /**
+
+	/**
      * Returns a List which contains the tickets which were added to the shopping cart.
      * @return a List that represents the shopping cart
      */
@@ -36,41 +31,50 @@ public class TicketHandling {
     /**
      * Validates the ticket input in the text field.
      * Returns {@code true} if the amount of the ticket is valid,
+     * @param textfield text for checking 
      * {@code false} otherwise and calls
      * @return {@code true} if the amount of the ticket is valid and
      * {@code false} otherwise
      */
     public static boolean isInputValidTickets(String textfield) {
-        MainFX.logger.debug("Ticket validation is in progress");
-        String errorMessage = "";
-
+        MainFX.logger.debug("TicketInputValidation is in progress");
+        
         if (textfield == null || textfield.length() == 0) {
-            errorMessage += "No valid amount of tickets!\n"; 
-        }
-
-        if (errorMessage.length() == 0 && Integer.parseInt(textfield) > 0) {
-        	MainFX.logger.debug("Ticket amount has been given properly");
-        	
-            return true;
-        } else {
-        	MainFX.logger.warn("Ticket amount has not been given properly");
-        	
             return false;
         }
+
+        try {
+        	Integer.parseInt(textfield);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+        
+        if (Integer.parseInt(textfield) < 1)
+        	return false;
+        	
+        return true;
     }
     
     /**
-     * Validates the user input in the text fields.
+     *      * Validates the user input in the text fields.
      * Returns {@code true} if all inputs are valid,
      * {@code false} otherwise
+     * @param name the name of the person
+     * @param email the e-mail address of the person
+     * @param telephone the telephone number of the person
+     * @param postalCode the postal code of the person
+     * @param city the city of the person
+     * @param street the street of the person
      * @return {@code true} if all inputs are valid and
      * {@code false} otherwise
      */
-    public static boolean isInputValidPerson(String name, String email, String telephone,
+    public static String isInputValidPerson(String name, String email, String telephone,
     		String postalCode, String city, String street) {
+        MainFX.logger.debug("PersonInputValidation is in progress");
+
         String errorMessage = "";
         if (name == null || name.length() == 0) {
-            errorMessage += "No valid first name!\n"; 
+            errorMessage += "No valid name!\n"; 
         }
         if (email == null || email.length() == 0) {
             errorMessage += "No valid e-mail address!\n"; 
@@ -94,12 +98,10 @@ public class TicketHandling {
         if (errorMessage.length() == 0) {
         	MainFX.logger.debug("Personal infos has been given correctly");
         	
-            return true;
+            return null;
         } else {
         	MainFX.logger.warn("Personal infos has not been added properly");
-        	
-        	handleWarning("Invalid Fields", "Please correct invalid fields", errorMessage);
-            return false;
+            return errorMessage;
         }
     }
     
@@ -109,6 +111,8 @@ public class TicketHandling {
      * @param ticket the ticket is going to be added to the shopping cart
      */
     public static void addToCart(Ticket ticket){
+        MainFX.logger.debug("Adding to cart is in progress");
+
     	boolean ticketExisted = false;
     	for (Ticket ticketIterator : shoppingCart) {
 			if (ticketIterator.getType().equals(ticket.getType()))	{
@@ -127,20 +131,14 @@ public class TicketHandling {
     }
     
     /**
-     * Handles the warning messages if something went wrong during the order.
-     * @param title the title of the message
-     * @param header the header of the message
-     * @param content the content of the message
+     * Decides whether the shopping cart is empty or not.
+     * @return {@code true} if the shopping cart empty,
+     * {@code false} otherwise
      */
-    public static void handleWarning(String title, String header, String content)	{
-        Alert alert = new Alert(AlertType.WARNING);
-        alert.initOwner(mainFX.getPrimaryStage());
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        alert.showAndWait();
-        
-        MainFX.logger.debug("Warning window has been opened");
+    public static boolean isShoppingCartEmpty() {
+        MainFX.logger.debug("Shopping cart checking is in progress");
+
+    	return shoppingCart.isEmpty();
     }
 
 }

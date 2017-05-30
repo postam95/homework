@@ -2,12 +2,15 @@ package homeworkProject.view;
 
 import homeworkProject.MainFX;
 import homeworkProject.businessLogic.TicketHandling;
+import homeworkProject.data.TicketService;
 import homeworkProject.model.Person;
 import homeworkProject.model.Ticket;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * Class for controlling the scene that is represented by StartView.fxml.
@@ -86,7 +89,11 @@ public class StartViewController {
      * Instance of the MainFX class to handle the calls to open another stage.
      */
 	private MainFX mainFX;
-    
+	
+	/**
+	 * Instance of the TicketService class to control ticket transactions.
+	 */
+	private TicketService ticketService;
 	
     /**
      * Initializes the controller class. Sets the label of the tables and calls
@@ -99,9 +106,8 @@ public class StartViewController {
         typeColumn.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
         priceColumn.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
         amountColumn.setCellValueFactory(cellData -> cellData.getValue().amountProperty().asObject());
-        
         MainFX.logger.debug("Shopping cart has been initialized");
-        
+
         initStartView();
     }
     
@@ -116,6 +122,7 @@ public class StartViewController {
         silver2Field.setText("1");
         bronze1Field.setText("1");
         bronze2Field.setText("1");
+        
         TicketHandling.getShoppingCart().clear();
         shoppingCartTable.setItems(TicketHandling.getShoppingCart());
         
@@ -123,31 +130,65 @@ public class StartViewController {
     }
 
     /**
-     * Gives the controll to this controller class.
+     * Gives the control to this controller class.
+     * @param mainFX to control this stage
      */
 	public void setMainFX(MainFX mainFX) {
 		this.mainFX = mainFX;
-	}	
+	}
+	
+	/**
+	 * Sets TicketService for transactions.
+	 * @param ticketService the ticketService object to controll ticket transactions
+	 */
+	public void setTicketService(TicketService ticketService){
+		this.ticketService = ticketService;
+	}
     
 	/**
 	 * Handles the actions after the user clicks on the Next button of the StartView.
 	 */
     @FXML
     private void handleNext() {
-    	Person tempPerson = new Person();
-    	boolean orderClicked = mainFX.showOrderView(tempPerson);
-    	if (orderClicked)	{
-    		MainFX.logger.debug("Next button has been clicked on the StartView");
-    		mainFX.showAckView(tempPerson);
-    		initStartView();
+    	if (TicketHandling.isShoppingCartEmpty())	{
+    		handleWarning("Warning", "Shopping cart is empty", "Please add tickets to the shopping cart");
+            
+    		MainFX.logger.warn("Next button has been clicked while the cart is empty");
+    	}
+    	
+    	else {
+    		for (Ticket ticket : TicketHandling.getShoppingCart()) {
+				if (ticketService.checkAvailableTickets(ticket.getType(), ticket.getAmount()) == false)	{
+					handleWarning("Error", "No enough ticket", "Sorry, there is no enough tickets");
+			        MainFX.logger.warn("There is no enough ticket for the order");
+					return;
+			}
+    	}
+	    	Person tempPerson = new Person();
+	    	boolean orderClicked = mainFX.showOrderView(tempPerson);
+	    	if (orderClicked)	{
+	    		MainFX.logger.debug("Next button has been clicked on the StartView");
+	    		mainFX.showAckView(tempPerson);
+	    		initStartView();
+	    	}
     	}
     }
-	
+    
+    /**
+     * Opens a dialog stage to check the available tickets.
+     */
+    @FXML
+	private void handleTickets()	{
+        MainFX.logger.debug("Tickets button has benne clicked");
+    	mainFX.showTicketView();
+    }
+    
     /**
      * Opens the map when the user clicks on the CircuitMap button of the StartView.
      */
     @FXML
     private void openMap() {
+        MainFX.logger.debug("Circuit map button has been clicked");
         mainFX.showMapView();
     }
     
@@ -157,14 +198,12 @@ public class StartViewController {
      */
     @FXML
     private void handleDeleteTicket() {
-        int selectedIndex = shoppingCartTable.getSelectionModel().getSelectedIndex();
-        if (selectedIndex >= 0) {
-        	shoppingCartTable.getItems().remove(selectedIndex);
-        	
+        int selectedTicket = shoppingCartTable.getSelectionModel().getSelectedIndex();
+        if (selectedTicket >= 0) {
+        	shoppingCartTable.getItems().remove(selectedTicket);
         	MainFX.logger.debug("A ticket has been deleted from the shopping cart");
         } else {
-        	TicketHandling.handleWarning("Warning", "No Selection", "Please select a ticket to remove");
-        	
+        	handleWarning("Warning", "No Selection", "Please select a ticket to remove");
         	MainFX.logger.warn("A ticket has not been selected, but Delete button has been clicked");
         }
     }
@@ -179,10 +218,9 @@ public class StartViewController {
         if (TicketHandling.isInputValidTickets(superGoldField.getText())) {
         	Ticket ticket = new Ticket("Super Gold", 450*Integer.parseInt(superGoldField.getText()), Integer.parseInt(superGoldField.getText()));
         	TicketHandling.addToCart(ticket);
-        	
         	MainFX.logger.debug("Super Gold ticket(s) has been added to the shopping cart");
         } else	{
-        	TicketHandling.handleWarning("Warning", "Bad amount", "Please give an integer which is greater than 0");
+        	handleWarning("Warning", "Bad amount", "Please give an integer which is greater than 0");
         	
         	MainFX.logger.warn("Bad amount of Super Gold tickets");
         }
@@ -201,7 +239,7 @@ public class StartViewController {
         	
         	MainFX.logger.debug("Gold 1 ticket(s) has been added to the shopping cart");
         } else	{
-        	TicketHandling.handleWarning("Warning", "Bad amount", "Please give an integer which is greater than 0");
+        	handleWarning("Warning", "Bad amount", "Please give an integer which is greater than 0");
         
         	MainFX.logger.warn("Bad amount of Gold 1 tickets");
         }
@@ -220,7 +258,7 @@ public class StartViewController {
         	
         	MainFX.logger.debug("Gold 2 ticket(s) has been added to the shopping cart");
         } else	{
-        	TicketHandling.handleWarning("Warning", "Bad amount", "Please give an integer which is greater than 0");
+        	handleWarning("Warning", "Bad amount", "Please give an integer which is greater than 0");
         
         	MainFX.logger.warn("Bad amount of Gold 2 tickets");
         }
@@ -239,7 +277,7 @@ public class StartViewController {
         	
         	MainFX.logger.debug("Silver 1 ticket(s) has been added to the shopping cart");
         } else	{
-        	TicketHandling.handleWarning("Warning", "Bad amount", "Please give an integer which is greater than 0");
+        	handleWarning("Warning", "Bad amount", "Please give an integer which is greater than 0");
         
         	MainFX.logger.warn("Bad amount of Silver 1 tickets");
         }
@@ -258,7 +296,7 @@ public class StartViewController {
         	
         	MainFX.logger.debug("Silver 2 ticket(s) has been added to the shopping cart");
         } else	{
-        	TicketHandling.handleWarning("Warning", "Bad amount", "Please give an integer which is greater than 0");
+        	handleWarning("Warning", "Bad amount", "Please give an integer which is greater than 0");
         
         	MainFX.logger.warn("Bad amount of Silver 2 tickets");
         }
@@ -277,7 +315,7 @@ public class StartViewController {
         	
         	MainFX.logger.debug("Bronze 1 ticket(s) has been added to the shopping cart");
         } else	{
-        	TicketHandling.handleWarning("Warning", "Bad amount",  "Please give an integer which is greater than 0");
+        	handleWarning("Warning", "Bad amount",  "Please give an integer which is greater than 0");
         
         	MainFX.logger.warn("Bad amount of Bronze 1 tickets");
         }
@@ -296,9 +334,26 @@ public class StartViewController {
         	
         	MainFX.logger.debug("Bronze 2 ticket(s) has been added to the shopping cart");
         } else	{
-        	TicketHandling.handleWarning("Warning", "Bad amount", "Please give an integer which is greater than 0");
+        	handleWarning("Warning", "Bad amount", "Please give an integer which is greater than 0");
         
         	MainFX.logger.warn("Bad amount of Bronze 2 tickets");
         }
+    }
+    
+    /**
+     * Handles the warning messages if something went wrong during the order.
+     * @param title the title of the message
+     * @param header the header of the message
+     * @param content the content of the message
+     */
+    public void handleWarning(String title, String header, String content)	{
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.initOwner(mainFX.getPrimaryStage());
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+        
+        MainFX.logger.debug("Warning window has been opened");
     }
 }

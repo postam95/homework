@@ -12,7 +12,7 @@ import javafx.beans.property.StringProperty;
  */
 
 public class Ticket {
-	
+
 	/**
 	 * Type for the ticket.
 	 */

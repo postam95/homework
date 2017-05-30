@@ -1,10 +1,15 @@
 package homeworkProject.view;
 
+
 import homeworkProject.MainFX;
 import homeworkProject.businessLogic.TicketHandling;
+import homeworkProject.data.TicketService;
 import homeworkProject.model.Person;
+import homeworkProject.model.Ticket;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 /**
@@ -56,10 +61,20 @@ public class OrderViewController {
      */
     private Person person;
     
+    /**
+     * Instance of the MainFX class to control stages.
+     */
+    private MainFX mainFX;
+    
 	/**
 	 * Stage for the order.
 	 */
     private Stage dialogStage;
+    
+	/**
+	 * Instance of the TicketService class to control ticket transactions.
+	 */
+	private TicketService ticketService;
     
     /**
      * Indicates whether the user clicked on the Order button.
@@ -79,11 +94,30 @@ public class OrderViewController {
         postalCodeField.setText(person.getPostalCode());
         cityField.setText(person.getCity());
         streetField.setText(person.getStreet());
+        
+        MainFX.logger.debug("Person data has been read");
+
     }
+    
+    /**
+     * Gives the control to this controller class.
+     * @param mainFX the mainFX instance to control the stage
+     */
+	public void setMainFX(MainFX mainFX) {
+		this.mainFX = mainFX;
+	}
+	
+	/**
+	 * Sets TicketService for transactions.
+	 * @param ticketService the ticketService object to control ticket transactions
+	 */
+	public void setTicketService(TicketService ticketService){
+		this.ticketService = ticketService;
+	}
 
     /**
      * Sets the stage of this dialog.
-     * @param dialogStage
+     * @param dialogStage the stage of this scene
      */
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
@@ -105,8 +139,11 @@ public class OrderViewController {
      */
     @FXML
     private void handleOrder() {
-    	if (TicketHandling.isInputValidPerson(nameField.getText(), emailField.getText(), telephoneField.getText(),
-    			postalCodeField.getText(), cityField.getText(), streetField.getText()))	{
+    	String errorMessage = TicketHandling.isInputValidPerson(nameField.getText(), emailField.getText(), telephoneField.getText(),
+    			postalCodeField.getText(), cityField.getText(), streetField.getText());
+    	if (errorMessage == null)	{
+            MainFX.logger.debug("Person input data is correct");
+
             person.setName(nameField.getText());
             person.setEmail(emailField.getText());
             person.setTelephone(telephoneField.getText());
@@ -116,8 +153,33 @@ public class OrderViewController {
         	orderClicked = true;
     		dialogStage.close();
     		
+    		for (Ticket ticket : TicketHandling.getShoppingCart()) {
+				ticketService.modifyTicketData(ticket.getType(), ticket.getAmount());
+			}
+    		
     		MainFX.logger.debug("Person datas has been read from the OrderView");
     	}
+    	else	{
+    		handleWarning("Warning", "Bad inputs", errorMessage);
+            MainFX.logger.warn("Person input data is not correct");
+    	}
+    }
+    
+    /**
+     * Handles the warning messages if something went wrong during the order.
+     * @param title the title of the message
+     * @param header the header of the message
+     * @param content the content of the message
+     */
+    public void handleWarning(String title, String header, String content)	{
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.initOwner(mainFX.getPrimaryStage());
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+        
+        MainFX.logger.debug("Warning window has been opened");
     }
 
     /**

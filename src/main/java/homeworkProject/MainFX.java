@@ -2,13 +2,20 @@ package homeworkProject;
 
 import java.io.IOException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import homeworkProject.data.TicketService;
 import homeworkProject.model.Person;
 import homeworkProject.view.AckViewController;
 import homeworkProject.view.MapViewController;
 import homeworkProject.view.OrderViewController;
 import homeworkProject.view.StartViewController;
+import homeworkProject.view.TicketViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -37,24 +44,49 @@ public class MainFX extends Application {
     /**
      * Pane for organizing the content of the stage.
      */
-    private BorderPane rootLayout;    
+    private BorderPane rootLayout;
     
     /**
+     * EntityManagerFactory for creating connection.
+     */
+	private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("TicketDataPersistenceUnit");
+	
+	/**
+	 * EntityManager for database.
+	 */
+	private EntityManager entityManager = entityManagerFactory.createEntityManager();
+	
+	/**
+	 * TicketService for managing database transactions.
+	 */
+	private TicketService ticketService = new TicketService(entityManager);
+	
+	/**
+	 * Method for closing database connections.
+	 */
+	@Override
+	public void stop ()	{
+		entityManager.close();
+		entityManagerFactory.close();
+	}
+	
+    /**
      * Start method of the application.
-     * Loads the initial stage and scene.
+     * Loads the initial stage, scene and database content.
      */
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Welcome to the Ticket System!");
-        
+    	ticketService.initializeDatabase();
+    	
         logger.debug("Initial stage has been opened");
         
         initRootLayout();
 
         showStartView();
     }
-
+    
     /**
      * Initializes the basic scene with loading the proper fxml file
      * which describes the layout of the root scene.
@@ -103,6 +135,36 @@ public class MainFX extends Application {
         }
     }
     
+    
+    /**
+     * Opens a new stage with the ticket database informations.
+     * Users can check the amounts of the tickets.
+     */
+    public void showTicketView() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainFX.class.getClassLoader().getResource("TicketView.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("These are the available ticket now");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            logger.debug("Ticket available window has been opened");
+
+            TicketViewController controller = loader.getController();
+            controller.setTicketService(ticketService);
+            controller.setDialogStage(dialogStage);
+
+            dialogStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * Opens a new stage when the user clicks on the Next button of the StartView
      * to ask for personal informations and finalize the order.
@@ -128,7 +190,9 @@ public class MainFX extends Application {
 
             OrderViewController controller = loader.getController();
             controller.setDialogStage(dialogStage);
+            controller.setMainFX(this);
             controller.setPerson(person);
+            controller.setTicketService(ticketService);
 
             dialogStage.showAndWait();
             return controller.isOrderClicked();
@@ -159,8 +223,8 @@ public class MainFX extends Application {
             logger.debug("Acknowledge window has been opened");
 
             AckViewController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
             controller.setPerson(person);
+            controller.setDialogStage(dialogStage);
 
             dialogStage.showAndWait();
         } catch (IOException e) {
@@ -183,6 +247,7 @@ public class MainFX extends Application {
             
             StartViewController controller = loader.getController();
             controller.setMainFX(this);
+            controller.setTicketService(ticketService);
 
             rootLayout.setCenter(startView);
         } catch (IOException e) {
@@ -191,7 +256,7 @@ public class MainFX extends Application {
     }
 
     /**
-     * Returns the main stage of the application
+     * Returns the main stage of the application.
      * @return the main stage of the application
      */
     public Stage getPrimaryStage() {

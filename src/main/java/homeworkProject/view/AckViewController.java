@@ -68,6 +68,7 @@ public class AckViewController {
      */
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
+        MainFX.logger.debug("DialogeStage has been set in AckView");
 	}
 	
 	/**
