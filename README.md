@@ -1,3 +1,3 @@
-This is a JavaFX application which produces a ticket handler system for the hungarian track, Hungaroring.
+This is a base JavaFX application which produces a ticket handler system.
 The application handles tickets, stores orders and send e-mails. Users can order tickets via the application
-and finally they get an acknowledgement window.
+and finally they get an acknowledgement.
